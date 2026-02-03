@@ -20,7 +20,7 @@ compile_args = []
 link_args = []
 
 if fc_id == 'gcc'
-  compile_args += ['-fall-intrinsics', '-fbacktrace', '-ffpe-summary=overflow']
+  compile_args += ['-fall-intrinsics', '-fbacktrace', '-ffpe-summary=overflow', '-fallow-argument-mismatch']
 endif
 
 if fc_id == 'intel' or fc_id == 'intel-cl'
