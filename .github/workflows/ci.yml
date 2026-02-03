@@ -53,7 +53,7 @@ jobs:
           version: ${{ matrix.version }}
 
       - name: Set GCC_LIBPATH on macOS
-        if: runner.os != 'macOS'
+        if: runner.os == 'macOS'
         run: echo "GCC_LIBPATH=$(brew --prefix)" >> $GITHUB_ENV
 
       - name: Setup pixi
