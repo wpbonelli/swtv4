@@ -104,4 +104,7 @@ sources = files(
   'vdf1wel6.f',
 )
 incdir = include_directories('include')
-exe = executable('swtv4', sources, install: true, include_directories: incdir)
+exe = executable('swtv4', sources,
+                 install: true,
+                 include_directories: incdir,
+                 dependencies: extra_deps)

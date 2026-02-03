@@ -18,12 +18,14 @@ message('C Compiler ID:', cc_id)
 
 compile_args = []
 link_args = []
+extra_deps = []
 
 if fc_id == 'gcc'
   compile_args += ['-fall-intrinsics', '-fbacktrace', '-ffpe-summary=overflow', '-fallow-argument-mismatch']
   # Link quadmath library on macOS (required for gfortran runtime)
   if host_machine.system() == 'darwin'
-    link_args += ['-lquadmath']
+    quadmath_dep = fc.find_library('quadmath', required: true, static: true)
+    extra_deps += [quadmath_dep]
   endif
 endif
 
