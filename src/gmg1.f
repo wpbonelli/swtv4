@@ -67,6 +67,18 @@ C
       REAL DUP, DLOW, CHGLIMIT, RDUM               !ERB
       COMMON /GMGCOMMON/DUP,DLOW,CHGLIMIT          !ERB
 C
+C---- C FUNCTION INTERFACES
+      INTERFACE
+        SUBROUTINE MF2KGMG_ALLOCATE(NCOL,NROW,NLAY,IPREC,ISM,ISC,
+     &          RELAX,ISIZ,IERR) BIND(C,NAME='MF2KGMG_ALLOCATE')
+          USE, INTRINSIC :: ISO_C_BINDING
+          INTEGER(C_INT) :: NCOL,NROW,NLAY,IPREC,ISM,ISC,ISIZ,IERR
+          REAL(C_DOUBLE) :: RELAX
+        END SUBROUTINE
+        SUBROUTINE MF2KGMG_FREE() BIND(C,NAME='MF2KGMG_FREE')
+        END SUBROUTINE
+      END INTERFACE
+C
 C--------------------------------------------------------------------
 C     READ AND PRINT COMMENTS
 C--------------------------------------------------------------------
@@ -251,6 +263,34 @@ C
       REAL DUP, DLOW, DAMPA, BIGHA, CHGLIMIT       !ERB
       DOUBLE PRECISION :: RSQ                      !ERB
       COMMON /GMGCOMMON/DUP,DLOW,CHGLIMIT          !ERB
+C
+C---- C FUNCTION INTERFACES
+      INTERFACE
+        SUBROUTINE MF2KGMG_ASSEMBLE(BIGR0,CR,CC,CV,HCOF,HNEW,RHS,
+     &                   HNOFLO,IBOUND,IERR) BIND(C,NAME='MF2KGMG_ASSEMBLE')
+          USE, INTRINSIC :: ISO_C_BINDING
+          REAL(C_DOUBLE) :: BIGR0
+          TYPE(C_PTR), VALUE :: CR,CC,CV,HCOF,HNEW,RHS,HNOFLO,IBOUND
+          INTEGER(C_INT) :: IERR
+        END SUBROUTINE
+        SUBROUTINE MF2KGMG_EVAL(ITER,BIGR,DRCLOSE,IITER,IOUTGMG,
+     &                          IIOUT) BIND(C,NAME='MF2KGMG_EVAL')
+          USE, INTRINSIC :: ISO_C_BINDING
+          INTEGER(C_INT) :: ITER,IITER,IOUTGMG,IIOUT
+          REAL(C_DOUBLE) :: BIGR,DRCLOSE
+        END SUBROUTINE
+        SUBROUTINE MF2KGMG_BIGH(BIGH,JBIGH,IBIGH,KBIGH)
+     &                          BIND(C,NAME='MF2KGMG_BIGH')
+          USE, INTRINSIC :: ISO_C_BINDING
+          REAL(C_DOUBLE) :: BIGH
+          INTEGER(C_INT) :: JBIGH,IBIGH,KBIGH
+        END SUBROUTINE
+        SUBROUTINE MF2KGMG_UPDATE(HNEW,DDAMP) BIND(C,NAME='MF2KGMG_UPDATE')
+          USE, INTRINSIC :: ISO_C_BINDING
+          TYPE(C_PTR), VALUE :: HNEW
+          REAL(C_DOUBLE) :: DDAMP
+        END SUBROUTINE
+      END INTERFACE
       !                                            !ERB
       IF (MHC_ACTIVE) THEN                         !ERB
         IF (KITER .EQ. 1) CALL MHC1AD(KPER,KSTP)   !ERB
@@ -626,6 +666,12 @@ C***********************************************************************
       SUBROUTINE GMG1DA()                  !ERB
 C     Deallocate arrays                    !ERB
       USE MHC, ONLY: MHC_ACTIVE, MHC1DA    !ERB
+C
+C---- C FUNCTION INTERFACE
+      INTERFACE
+        SUBROUTINE MF2KGMG_FREE() BIND(C,NAME='MF2KGMG_FREE')
+        END SUBROUTINE
+      END INTERFACE
       !                                    !ERB
       CALL MF2KGMG_FREE()                  !ERB
       IF (MHC_ACTIVE) CALL MHC1DA()        !ERB
