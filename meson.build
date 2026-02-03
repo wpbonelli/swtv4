@@ -21,6 +21,10 @@ link_args = []
 
 if fc_id == 'gcc'
   compile_args += ['-fall-intrinsics', '-fbacktrace', '-ffpe-summary=overflow', '-fallow-argument-mismatch']
+  # Link quadmath library on macOS (required for gfortran runtime)
+  if host_machine.system() == 'darwin'
+    link_args += ['-lquadmath']
+  endif
 endif
 
 if fc_id == 'intel' or fc_id == 'intel-cl'
