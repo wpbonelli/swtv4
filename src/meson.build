@@ -107,4 +107,5 @@ incdir = include_directories('include')
 exe = executable('swtv4', sources,
                  install: true,
                  include_directories: incdir,
-                 dependencies: extra_deps)
+                 dependencies: extra_deps,
+                 link_language: 'fortran')
