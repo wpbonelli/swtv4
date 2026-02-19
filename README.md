@@ -1,6 +1,6 @@
 # SEAWAT Version 4
 
-[![swtv4 checks](https://github.com/MODFLOW-ORG/swtv4/actions/workflows/ci.yml/badge.svg)](https://github.com/MODFLOW-ORG/swtv4/actions/workflows/ci.yml)
+[![swtv4 CI/CD](https://github.com/MODFLOW-ORG/swtv4/actions/workflows/ci.yml/badge.svg)](https://github.com/MODFLOW-ORG/swtv4/actions/workflows/ci.yml)
 
 ## Overview of SEAWAT
 
@@ -13,3 +13,11 @@ SEAWAT Version 4 is a replacement for SEAWAT-2000. SEAWAT-2000 users are encoura
 ### Report Citation
 
 Langevin, C.D., Thorne, D.T., Jr., Dausman, A.M., Sukop, M.C., and Guo, Weixing, 2008, SEAWAT Version 4: A computer program for simulation of multi-species solute and heat transport: U.S. Geological Survey Techniques and Methods, book 6, chap. A22, 39 p., https://doi.org/10.3133/tm6A22
+
+## Source
+
+Source code was retrieved from https://water.usgs.gov/water-resources/software/SEAWAT/swt_v4_00_05.zip.
+
+## Disclaimer
+
+This repository is provided as a courtesy and is not actively maintained. Modifications to the original source may have been made. Use this resource at your own risk; it should be regarded as provisional and not as an authoritative substitute for the official software release by the original authors.
